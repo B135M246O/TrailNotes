@@ -1,0 +1,29 @@
+[
+  {
+    "model": "posts.group",
+    "pk": 1,
+    "fields": {
+      "title": "Пешие маршруты",
+      "slug": "hiking",
+      "description": "Тропы, походы выходного дня и заметки о снаряжении."
+    }
+  },
+  {
+    "model": "posts.group",
+    "pk": 2,
+    "fields": {
+      "title": "Городские прогулки",
+      "slug": "city-walks",
+      "description": "Прогулки по городам, музеи и полезные остановки в дороге."
+    }
+  },
+  {
+    "model": "posts.group",
+    "pk": 3,
+    "fields": {
+      "title": "Поездки по России",
+      "slug": "russia",
+      "description": "Путевые заметки из разных регионов России."
+    }
+  }
+]

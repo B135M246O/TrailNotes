@@ -10,7 +10,6 @@ from .models import Follow, Group, Post, User
 
 
 def paginator_func(posts, per_list, request):
-    """Паджинатор."""
     paginator = Paginator(posts, per_list)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -19,7 +18,6 @@ def paginator_func(posts, per_list, request):
 
 @cache_page(20, key_prefix='index_page')
 def index(request):
-    """Рендер главной страницы."""
     template = 'posts/index.html'
     posts = Post.objects.all()
     page_obj = paginator_func(posts, P_PER_L, request)
@@ -31,7 +29,6 @@ def index(request):
 
 
 def group_posts(request, slug):
-    """Рендер страницы сообщества."""
     template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
     posts = group.group_posts.all()
@@ -44,7 +41,6 @@ def group_posts(request, slug):
 
 
 def profile(request, username):
-    """Рендер страницы профайла."""
     template = 'posts/profile.html'
     user = get_object_or_404(User, username=username)
     posts = user.post.all()
@@ -64,7 +60,6 @@ def profile(request, username):
 
 
 def post_detail(request, post_id):
-    """Рендер страницы поста."""
     template = 'posts/post_detail.html'
     post = get_object_or_404(Post, id=post_id)
     counter = post.author.post.count()
@@ -81,7 +76,6 @@ def post_detail(request, post_id):
 
 @login_required
 def post_create(request):
-    """Рендер страницы создания поста."""
     template = 'posts/create_post.html'
     form = PostForm(
         request.POST or None,
@@ -97,7 +91,6 @@ def post_create(request):
 
 @login_required
 def post_edit(request, post_id):
-    """Рендер страницы редактирования поста."""
     template = 'posts/create_post.html'
     post = get_object_or_404(Post, id=post_id)
     if request.user != post.author:
@@ -116,7 +109,6 @@ def post_edit(request, post_id):
 
 @login_required
 def add_comment(request, post_id):
-    """Добавление комментария к посту."""
     post = get_object_or_404(Post, id=post_id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
@@ -129,7 +121,6 @@ def add_comment(request, post_id):
 
 @login_required
 def follow_index(request):
-    """Страница с постами авторов, на которых подписан user."""
     template = 'posts/follow.html'
     posts = Post.objects.filter(author__following__user=request.user)
     page_obj = paginator_func(posts, P_PER_L, request)
@@ -142,7 +133,6 @@ def follow_index(request):
 
 @login_required
 def profile_follow(request, username):
-    """Подписка на автора."""
     post_author = get_object_or_404(User, username=username)
     if request.user == post_author:
         return redirect('posts:profile', username=username)
@@ -156,7 +146,6 @@ def profile_follow(request, username):
 
 @login_required
 def profile_unfollow(request, username):
-    """Отписаться от автора."""
     post_author = get_object_or_404(User, username=username)
     if request.user == post_author:
         return redirect('posts:profile', username=username)

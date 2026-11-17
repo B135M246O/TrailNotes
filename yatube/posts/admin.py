@@ -4,7 +4,6 @@ from .models import Comment, Follow, Group, Post
 
 
 class PostAdmin(admin.ModelAdmin):
-    """Кастомная админка для модели Post."""
     list_display = (
         'pk',
         'text',
@@ -20,7 +19,6 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class GroupAdmin(admin.ModelAdmin):
-    """Кастомная админка для модели Group."""
     list_display = (
         'pk',
         'title',
@@ -35,7 +33,6 @@ class GroupAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    """Кастомная админка для модели Comment."""
     list_display = (
         'pk',
         'post',
@@ -49,7 +46,6 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class FollowAdmin(admin.ModelAdmin):
-    """Кастомная админка для модели Follow."""
     list_display = (
         'user',
         'author',
@@ -57,6 +53,10 @@ class FollowAdmin(admin.ModelAdmin):
     list_filter = ('author', 'user',)
     empty_value_display = '-пусто-'
 
+
+admin.site.site_header = 'TrailNotes — сообщество путешественников'
+admin.site.site_title = 'TrailNotes'
+admin.site.index_title = 'Заметки, сообщества и подписки'
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Group, GroupAdmin)

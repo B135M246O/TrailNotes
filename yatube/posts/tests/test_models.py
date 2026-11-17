@@ -27,8 +27,8 @@ class PostModelTest(TestCase):
     def test_models_have_correct_verbose_name(self):
         """Проверка корректности verbose_name."""
         field_verbose = {
-            'text': 'Текст поста',
-            'group': 'Группа',
+            'text': 'Текст путевой заметки',
+            'group': 'Сообщество путешественников',
             'author': 'Автор',
             'pub_date': 'Дата публикации',
         }
@@ -40,8 +40,8 @@ class PostModelTest(TestCase):
     def test_models_have_correct_help_texts(self):
         """Проверка корректности help_text."""
         field_help_texts = {
-            'text': 'Текст нового поста',
-            'group': 'Группа, к которой будет относиться пост',
+            'text': 'Маршрут, впечатления и полезные детали поездки',
+            'group': 'Сообщество путешественников для этой заметки',
         }
         for value, expected in field_help_texts.items():
             with self.subTest(value=value):

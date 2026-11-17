@@ -1,19 +1,19 @@
 {% extends "base.html" %}
-  {% block title %} Новый пост {% endblock %}
+  {% block title %} Новая путевая заметка {% endblock %}
     {% load user_filters %}
     {% block content %}
       <div class="container py-5">
         <div class="row justify-content-center">
           <div class="col-md-8 p-5">
             <div class="card">
-              <div class="card-header">       
+              <div class="card-header">
                 {% if is_edit %}
-                  Редактировать пост
+                  Редактировать путевую заметку
                 {% else %}
-                  Новый пост
+                  Новая путевая заметка
                 {% endif %}
               </div>
-              <div class="card-body">        
+              <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
                   {% csrf_token %}
                   {% for field in form %}
@@ -30,7 +30,7 @@
                             {{ field.help_text }}
                           </small>
                         {% endif %}
-                    </div>            
+                    </div>
                   {% endfor %}
                   <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">

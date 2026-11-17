@@ -1,21 +1,16 @@
-# from django.conf import settings
 import os
+
+from django.core.management.utils import get_random_secret_key
+from dotenv import load_dotenv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = 'o2k*eq(k!5@(k=7ytg8h4!h!#9sk3ct19jkfh$3p%r-ap*7nrt'
-
-DEBUG = True
-
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '[::1]',
-    'testserver',
-    'www.abbadon.pythonanywhere.com',
-    'abbadon.pythonanywhere.com',
-]
+load_dotenv(os.path.join(BASE_DIR, '..', '.env'))
+SECRET_KEY = os.getenv('SECRET_KEY') or get_random_secret_key()
+DEBUG = os.getenv('DEBUG', 'true').lower() == 'true'
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,[::1]').split(',')
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 INSTALLED_APPS = [
@@ -101,7 +96,6 @@ TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
-USE_L10N = True
 
 USE_TZ = True
 
@@ -111,15 +105,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 
-# if settings.DEBUG:
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-# else:
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'posts:index'
-# LOGOUT_REDIRECT_URL = 'posts:index'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
@@ -131,6 +120,5 @@ CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        # 'LOCATION': 'index_page',
     }
 }

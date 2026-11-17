@@ -2,14 +2,14 @@
 {% load thumbnail %}
 {% block title %} Профайл пользователя {{ author.get_full_name }}{% endblock %}
 {% block content %}
-  <div class="container py-5">        
+  <div class="container py-5">
     <div class="mb-5">
-      <h1> Все посты пользователя {{ author.get_full_name }} </h1>
-      <h3> Всего постов: {{ counter }} </h3> 
+      <h1> Путевые заметки путешественника {{ author.get_full_name }} </h1>
+      <h3> Всего заметок: {{ counter }} </h3>
       {% if user != author %}
         {% include 'includes/subscription.html' %}
       {% endif %}
-    </div>  
+    </div>
     {% for post in page_obj %}
       <article>
         <ul>
@@ -27,7 +27,7 @@
       </article>
       {% if post.group %}
         <a href="{% url 'posts:group_list' post.group.slug %}">
-          Все записи группы {{ post.group }}
+          Все заметки сообщества {{ post.group }}
         </a>
       {% endif %}
       {% if not forloop.last %}<hr>{% endif %}
